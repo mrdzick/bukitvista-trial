@@ -16,8 +16,23 @@ class ProductRepository {
   }
 
   async getAllProducts(filter) {
+    const { limit, category, sort } = filter;
+
+    const where = {};
+
+    if (category) {
+      where.category = category;
+    }
+
+    const order = sort === 'desc' ? 'DESC' : 'ASC';
+    const limitSetting = limit ? parseInt(filter.limit, 10) : null;
+
     return this.model.findAll({
-      where: filter,
+      where,
+      limit: limitSetting,
+      order: [
+        ['title', order],
+      ],
     });
   }
 
