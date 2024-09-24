@@ -7,6 +7,10 @@ const updateProductValidator = celebrate({
     description: Joi.string().required(),
     image: Joi.string().uri().required(),
     category: Joi.string().valid("electronics", "jewelry", "men's clothing", "women's clothing").required(),
+  }, {
+    abortEarly: false,
+  }, {
+    mode: 'full',
   }),
 });
 
