@@ -28,8 +28,10 @@ class ProductService {
       throw new ResponseError('Validation error', 400);
     }
 
-    const updatedProduct = await this.productRepository.update(id, product);
+    await this.productRepository.update(id, product);
 
+    const updatedProduct = await this.productRepository.getProductById(id);
+    
     return updatedProduct;
   }
 

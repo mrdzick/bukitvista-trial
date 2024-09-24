@@ -21,6 +21,14 @@ class ProductRepository {
     });
   }
 
+  async getProductById(id) {
+    return this.model.findOne({
+      where: {
+        id,
+      },
+    });
+  }
+
   async update(id, value) {
     return this.model.update({
       title: value.title,

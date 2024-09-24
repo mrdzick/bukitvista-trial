@@ -11,7 +11,10 @@ class ProductController {
       const product = req.body;
       const createdProduct = await this.productService.createProduct(product);
 
-      res.status(201).json(createdProduct);
+      res.status(201).json({
+        message: 'Product created successfully',
+        data: createdProduct,
+      });
     } catch (error) {
       next(error);
     }
@@ -23,7 +26,10 @@ class ProductController {
       const product = req.body;
       const updatedProduct = await this.productService.updateProduct(id, product);
 
-      res.json(updatedProduct);
+      res.status(201).json({
+        message: 'Product updated successfully',
+        data: updatedProduct,
+      });
     } catch (error) {
       next(error);
     }
@@ -33,9 +39,12 @@ class ProductController {
     try {
       const filter = req.query;
       
-      const products = await this.productService.getAllProducts();
+      const products = await this.productService.getAllProducts(filter);
 
-      res.status(200).json(products);
+      res.status(200).json({
+        message: 'Products fetched successfully',
+        data: products,
+      });
     } catch (error) {
       next(error);
     }
